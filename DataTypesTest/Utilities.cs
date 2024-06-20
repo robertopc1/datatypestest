@@ -12,8 +12,11 @@ public static class Utilities
 
         foreach (var item in dictDocRedisDynamic)
         {
-            if (item.Value is decimal || item.Value is float)
-                hashEntries[index++] = new HashEntry(item.Key, item.Value.Tostring());
+            if(item.Value is decimal)
+                hashEntries[index++] = new HashEntry(item.Key, item.Value.ToString()); // this will store exaxct
+            
+            if(item.Value is double)
+                hashEntries[index++] = new HashEntry(item.Key, item.Value); // This will store with extra digitis added
         }
 
         return hashEntries;
