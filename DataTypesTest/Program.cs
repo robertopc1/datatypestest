@@ -1,8 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-
 using System.Diagnostics;
-using System.Net.NetworkInformation;
 using DataTypesTest;
 using Microsoft.Extensions.Configuration;
 using NRedisStack;
