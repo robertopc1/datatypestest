@@ -42,7 +42,7 @@ public class Program
                 .AddNumericField("decimalValue"));
         
         string key = "datatype:example1";
-        double doubleValue = 0.000014; //6740398.58;
+        double doubleValue = 0.000000014; //6740398.58;
         decimal decimalValue = Convert.ToDecimal(doubleValue);
         
         var dict = new Dictionary<string, dynamic>();
@@ -71,7 +71,11 @@ public class Program
             new AggregationRequest("*")
                 .GroupBy("@decimalValue", Reducers.Avg("@decimalValue").As("avg")));
 
-        var searchResult = ft.Search(index, new Query("*").Limit(0, 20));
+        var theRow = aggregateDecimalResult.GetRow(0);
+        var theResult = theRow.GetString("avg");
+        decimal theValue = decimal.Parse(theResult, System.Globalization.NumberStyles.Float);
+        
+        var searchResult = ft.Search(index, new Query("@decimalValue:[0.000000014 0.000000014]").Limit(0, 20));
     }
 }
 
